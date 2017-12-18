@@ -1,0 +1,22 @@
+[Concierge]
+PORT = 5555
+APIAI_CLIENT_ACCESS_TOKEN = afe5ea7a1f90708a57f2abebeab123426
+FACEBOOK_CLIENT_ACCESS_TOKEN = EAABidpF7a4y5yeyewq35wtwye5yuedge4yur6433s6d7u678kjcx43647uj74srcuthr65trwEZRHTDXFHTYSEFSFSFEFSFsdfeshsertSRSRSEFSDFSEF344226sfsdf4sAFGRTJadasDADGHGFHYFfhgdASDSGDTHFHJKDHDHSGFDZD
+HOST = 192.168.1.100
+CERT = /etc/ssl/certs/your_combined_cert.crt
+KEY = /etc/ssl/private/your_combined_key.key
+
+[AllowedServices]
+apiai = gsgrh324sgs4
+facebook = gsrg45wfgsyd4sdfgw342wf4w25wef34SFSF
+
+[UserId]
+apiai = yourapiaiid
+facebook = 23426262511231
+
+[Hue]
+HOST = 192.168.1.10
+
+[MongoDB]
+HOST = localhost
+PORT = 5550
