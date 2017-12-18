@@ -1,25 +1,26 @@
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+# from urllib.error import HTTPError
 
 import json
 
-from flask import Flask, jsonify, request, make_response
-import os
+# from flask import Flask, jsonify, request, make_response
+# import os
 
-def processRequest(req):
+
+def process_request(req):
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
+    yql_query = make_yql_query(req)
     if yql_query is None:
         return {}
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read().decode("utf-8")
     data = json.loads(result)
-    res = makeWebhookResult(data)
+    res = make_webhook_result(data)
     return res
 
 
-def makeYqlQuery(req):
+def make_yql_query(req):
     result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
@@ -28,11 +29,13 @@ def makeYqlQuery(req):
 
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
-# Convert Farenheit to Celsius, return with one decimal place
-def FtoC(F):
-    return "{0:.1f}".format((float(F)-32)/(9/5))
 
-def makeWebhookResult(data):
+# Convert Fahrenheit to Celsius, return with one decimal place
+def f2c(f):
+    return "{0:.1f}".format((float(f)-32)/(9/5))
+
+
+def make_webhook_result(data):
     query = data.get('query')
     if query is None:
         return {}
@@ -59,11 +62,10 @@ def makeWebhookResult(data):
 
     if units.get('temperature') == "F":
         speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-                 ", the temperature is " + FtoC(condition.get('temp')) + " C"
+                 ", the temperature is " + f2c(condition.get('temp')) + " C"
     else:
         speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
                  ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
-
 
     print("Response:")
     print(speech)

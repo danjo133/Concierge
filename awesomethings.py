@@ -1,16 +1,17 @@
-from urllib.parse import urlparse, urlencode
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+# from urllib.parse import urlparse, urlencode
+# from urllib.request import urlopen, Request
+# from urllib.error import HTTPError
 
-from flask import Flask, jsonify, request, make_response
-import os
+# from flask import Flask, jsonify, request, make_response
+# import os
 
 
-def processRequest(req):
-    res = makeWebhookResult(req)
+def process_request(req):
+    res = make_webhook_result(req)
     return res
 
-def makeWebhookResult(data):
+
+def make_webhook_result(data):
     result = data.get('result')
     if result is None:
         return {}
